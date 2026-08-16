@@ -2,9 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>FREEZE FREEKS — Crunch Like a Freek.</title>
-<meta name="description" content="Freeze dried candy with bold flavor and extreme crunch. Reach out to get yours.">
+<title>FREEZE FREEKS — Freeze Dried Candy | Crunch Like a Freek.</title>
+<meta name="description" content="FREEZE FREEKS makes freeze dried candy with bold flavor and extreme crunch — freeze dried Skittles, Jolly Ranchers, sour candy and more, in small batches. No store, no checkout: just reach out and get some. Crunch Like a Freek.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://freezefreeks.com/">
+<meta name="theme-color" content="#0B0B0D">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- social cards -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FREEZE FREEKS">
+<meta property="og:title" content="FREEZE FREEKS — Freeze Dried Candy">
+<meta property="og:description" content="Bold flavor. Extreme crunch. Freeze dried Skittles, Jolly Ranchers & more, made in small batches. Reach out to get yours — Crunch Like a Freek.">
+<meta property="og:url" content="https://freezefreeks.com/">
+<meta property="og:image" content="https://freezefreeks.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A piece of freeze dried candy, puffed and crunchy">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FREEZE FREEKS — Freeze Dried Candy">
+<meta name="twitter:description" content="Bold flavor. Extreme crunch. Freeze dried candy in small batches — reach out to get yours.">
+<meta name="twitter:image" content="https://freezefreeks.com/img/og.jpg">
+
+<!-- fonts used above the fold -->
+<link rel="preload" href="/fonts/marker.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="/fonts/bc800i.ttf" as="font" type="font/ttf" crossorigin>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://freezefreeks.com/#org",
+      "name": "FREEZE FREEKS",
+      "url": "https://freezefreeks.com/",
+      "logo": "https://freezefreeks.com/apple-touch-icon.png",
+      "slogan": "Crunch Like a Freek.",
+      "description": "Small-batch freeze dried candy with bold flavor and extreme crunch.",
+      "sameAs": [
+        "https://www.tiktok.com/@freezefreeks",
+        "https://www.instagram.com/freezefreeks",
+        "https://www.youtube.com/@freezefreeks"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://freezefreeks.com/#site",
+      "url": "https://freezefreeks.com/",
+      "name": "FREEZE FREEKS",
+      "publisher": { "@id": "https://freezefreeks.com/#org" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Freeze Dried Candy Lineup",
+      "itemListElement": [
+        {
+          "@type": "Product",
+          "position": 1,
+          "name": "Freeze Dried Original Skittles",
+          "image": "https://freezefreeks.com/img/skittles.jpg",
+          "description": "Original Skittles, freeze dried — puffed, light, and extra crunchy.",
+          "brand": { "@id": "https://freezefreeks.com/#org" }
+        },
+        {
+          "@type": "Product",
+          "position": 2,
+          "name": "Freeze Dried Jolly Ranchers Original",
+          "image": "https://freezefreeks.com/img/jr-original.jpg",
+          "description": "Jolly Ranchers original flavors, freeze dried from hard candy into an airy crunch.",
+          "brand": { "@id": "https://freezefreeks.com/#org" }
+        },
+        {
+          "@type": "Product",
+          "position": 3,
+          "name": "Freeze Dried Sour Skittles",
+          "image": "https://freezefreeks.com/img/sour-skittles.jpg",
+          "description": "Sour Skittles, freeze dried — the pucker survives the freeze.",
+          "brand": { "@id": "https://freezefreeks.com/#org" }
+        },
+        {
+          "@type": "Product",
+          "position": 4,
+          "name": "Freeze Dried Jolly Ranchers Watermelon",
+          "image": "https://freezefreeks.com/img/watermelon.jpg",
+          "description": "Watermelon Jolly Ranchers, freeze dried — the fan favorite.",
+          "brand": { "@id": "https://freezefreeks.com/#org" }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <style>
 /* ============ FREEZE FREEKS — single-theme matte-black brand world ============ */
 @font-face{font-family:'Marker';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/marker.ttf) format('truetype')}
@@ -373,25 +463,25 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
     </div>
     <div class="flavor-grid">
       <article class="flavor f-red">
-        <canvas width="360" height="220" data-flavor="red" data-img="/img/skittles.jpg" aria-hidden="true"></canvas>
+        <canvas width="360" height="220" data-flavor="red" data-img="/img/skittles.jpg" data-alt="Freeze dried red Skittle, puffed and cratered with an S on top" aria-hidden="true"></canvas>
         <span class="flavor-tag">Skittles</span>
         <h3>Original Skittles</h3>
         <p>The rainbow, puffed and crunchified. Every color, twice as loud.</p>
       </article>
       <article class="flavor f-blue">
-        <canvas width="360" height="220" data-flavor="blue" data-img="/img/jr-original.jpg" aria-hidden="true"></canvas>
+        <canvas width="360" height="220" data-flavor="blue" data-img="/img/jr-original.jpg" data-alt="Freeze dried Jolly Rancher, puffed into an airy pink crunch" aria-hidden="true"></canvas>
         <span class="flavor-tag">Jolly Ranchers</span>
         <h3>Jolly Ranchers Original</h3>
         <p>Hard candy goes airy. Original flavors, zero jaw workout.</p>
       </article>
       <article class="flavor f-green">
-        <canvas width="360" height="220" data-flavor="green" data-img="/img/sour-skittles.jpg" aria-hidden="true"></canvas>
+        <canvas width="360" height="220" data-flavor="green" data-img="/img/sour-skittles.jpg" data-alt="Freeze dried sour candy puff in red and yellow" aria-hidden="true"></canvas>
         <span class="flavor-tag">Sour Skittles</span>
         <h3>Sour Skittles</h3>
         <p>Sour. Sweet. Gone. The pucker survives the freeze.</p>
       </article>
       <article class="flavor f-pink">
-        <canvas width="360" height="220" data-flavor="pink" data-img="/img/watermelon.jpg" aria-hidden="true"></canvas>
+        <canvas width="360" height="220" data-flavor="pink" data-img="/img/watermelon.jpg" data-alt="Freeze dried watermelon Jolly Rancher slice with pink center and green rind" aria-hidden="true"></canvas>
         <span class="flavor-tag">Watermelon</span>
         <h3>Jolly Ranchers Watermelon</h3>
         <p>All watermelon, all the time. The fan favorite, freeze dried.</p>
@@ -787,7 +877,7 @@ document.querySelectorAll('.flavor canvas[data-img]').forEach(function(cv){
   const img=new Image();
   img.onload=function(){
     const el=document.createElement('img');
-    el.src=cv.dataset.img;el.alt='';
+    el.src=cv.dataset.img;el.alt=cv.dataset.alt||'';el.loading='lazy';el.decoding='async';
     el.style.cssText='width:100%;height:auto;display:block;border-radius:6px;object-fit:contain;aspect-ratio:360/220;background:#fff';
     cv.replaceWith(el);
   };
