@@ -175,9 +175,22 @@ let all=[],msgs=[];
 const fmt=new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'});
 
 async function load(){
-  const [a,b]=await Promise.all([fetch('/api/signups'),fetch('/api/messages')]);
-  all=await a.json();msgs=await b.json();
-  render();renderMsgs();
+  try{
+    const [a,b]=await Promise.all([fetch('/api/signups'),fetch('/api/messages')]);
+    if(!a.ok||!b.ok)throw new Error('no api');
+    all=await a.json();msgs=await b.json();
+    render();renderMsgs();
+  }catch(err){
+    // static hosting (e.g. Netlify) — no Python backend behind this page
+    for(const id of ['stat-total','stat-week','stat-today','stat-msgs'])
+      document.getElementById(id).textContent='—';
+    document.getElementById('empty').innerHTML=
+      '<span class="marker">This dashboard needs the local server.</span>'
+      +'On Netlify, signups and candy requests are collected by Netlify Forms — '
+      +'open your site\'s dashboard and check the <b>Forms</b> tab '
+      +'(forms “freek-list” and “candy-request”).';
+    document.getElementById('msg-empty').textContent='See the Forms tab in your Netlify dashboard.';
+  }
 }
 
 function renderMsgs(){

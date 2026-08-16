@@ -306,6 +306,14 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
 </style>
 </head>
 <body>
+<!-- static form definitions for Netlify Forms detection (real forms submit via JS) -->
+<form name="freek-list" data-netlify="true" hidden aria-hidden="true">
+  <input type="email" name="email">
+</form>
+<form name="candy-request" data-netlify="true" hidden aria-hidden="true">
+  <input type="text" name="name"><input type="email" name="email">
+  <input type="text" name="flavor"><textarea name="msg"></textarea>
+</form>
 
 <nav>
   <a class="nav-logo" href="#top">FREEZE <span>FREEKS</span></a>
@@ -800,6 +808,15 @@ document.querySelectorAll('.flavor canvas[data-img]').forEach(function(cv){
   t.innerHTML+=t.innerHTML;
 })();
 
+/* ---------- form transport: local Python API vs Netlify Forms ---------- */
+const STATIC_HOST=!/^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname);
+function postNetlifyForm(name,fields){
+  return fetch('/',{
+    method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams(Object.assign({'form-name':name},fields)).toString()
+  });
+}
+
 /* ---------- freek list signup → backend ---------- */
 document.getElementById('signupform').addEventListener('submit',async function(e){
   e.preventDefault();
@@ -810,12 +827,17 @@ document.getElementById('signupform').addEventListener('submit',async function(e
     msg.className='signup-msg err';return;
   }
   try{
-    const res=await fetch('/api/signup',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,source:'freek-list'})
-    });
-    const data=await res.json();
-    if(res.ok){
+    let ok,data={};
+    if(STATIC_HOST){
+      ok=(await postNetlifyForm('freek-list',{email:email})).ok;
+    }else{
+      const res=await fetch('/api/signup',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email,source:'freek-list'})
+      });
+      data=await res.json();ok=res.ok;
+    }
+    if(ok){
       msg.textContent=data.duplicate?'You’re already on the list — crunch incoming.':'You’re in! Welcome to the Freek List. 🥶';
       msg.className='signup-msg ok';
       e.target.reset();
@@ -834,12 +856,17 @@ document.getElementById('orderform').addEventListener('submit',async function(e)
   e.preventDefault();
   const f=e.target,msg=document.getElementById('ordermsg');
   try{
-    const res=await fetch('/api/contact',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name:f.name.value,email:f.email.value,flavor:f.flavor.value,msg:f.msg.value})
-    });
-    const data=await res.json();
-    if(res.ok){
+    let ok,data={};
+    if(STATIC_HOST){
+      ok=(await postNetlifyForm('candy-request',{name:f.name.value,email:f.email.value,flavor:f.flavor.value,msg:f.msg.value})).ok;
+    }else{
+      const res=await fetch('/api/contact',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:f.name.value,email:f.email.value,flavor:f.flavor.value,msg:f.msg.value})
+      });
+      data=await res.json();ok=res.ok;
+    }
+    if(ok){
       msg.textContent='Got it! We’ll get back to you soon — stay crunchy.';
       msg.className='form-msg ok';
       f.reset();
