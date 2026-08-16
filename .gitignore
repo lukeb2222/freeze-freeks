@@ -1,0 +1,4 @@
+# customer data — never commit
+signups.json
+messages.json
+.DS_Store

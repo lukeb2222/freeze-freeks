@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>FREEZE FREEKS — Crunch Like a Freek.</title>
+<meta name="description" content="Freeze dried candy with bold flavor and extreme crunch. Reach out to get yours.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* ============ FREEZE FREEKS — single-theme matte-black brand world ============ */
+@font-face{font-family:'Marker';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/marker.ttf) format('truetype')}
+@font-face{font-family:'Barlow Condensed';font-style:italic;font-weight:800;font-display:swap;src:url(/fonts/bc800i.ttf) format('truetype')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/bc600.ttf) format('truetype')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/b400.ttf) format('truetype')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/b600.ttf) format('truetype')}
+
+:root{
+  --ink:#0B0B0D;          /* matte black pouch */
+  --ink-2:#131318;        /* raised card */
+  --ink-3:#1C1C23;        /* borders / seams */
+  --paper:#F4F4F1;        /* off-white print */
+  --dim:#9C9CA6;          /* secondary print */
+  --blue:#2E64FF;         /* electric brand blue */
+  --blue-hot:#4D7BFF;
+  --red:#E03A2F;          /* skittles */
+  --green:#96C93D;        /* sour */
+  --pink:#EE3D6E;         /* watermelon */
+  --gold:#F5A623;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  background:var(--ink);
+  color:var(--paper);
+  font-family:'Barlow',system-ui,sans-serif;
+  font-size:17px;line-height:1.6;
+  overflow-x:hidden;
+}
+
+::selection{background:var(--blue);color:#fff}
+
+h1,h2,h3{text-wrap:balance}
+
+a{color:var(--blue-hot)}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ---- utility type ---- */
+.eyebrow{
+  font-family:'Barlow Condensed';font-weight:600;font-style:normal;
+  text-transform:uppercase;letter-spacing:.22em;font-size:.82rem;color:var(--dim);
+}
+.headline{
+  font-family:'Barlow Condensed';font-style:italic;font-weight:800;
+  text-transform:uppercase;line-height:.95;letter-spacing:.01em;
+  font-size:clamp(2.4rem,6vw,4rem);
+}
+.headline .pop{color:var(--blue-hot)}
+.marker{font-family:'Marker',cursive}
+
+/* ================= NAV ================= */
+nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;
+  background:color-mix(in srgb,var(--ink) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--ink-3);
+}
+.nav-logo{font-family:'Marker';font-size:1.15rem;text-decoration:none;line-height:1;color:var(--paper)}
+.nav-logo span{color:var(--blue-hot)}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.85rem;color:var(--dim);text-decoration:none;
+  transition:color .15s;
+}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--paper)}
+.nav-cta{
+  background:var(--blue);color:#fff !important;padding:9px 18px;border-radius:3px;
+}
+.nav-cta:hover,.nav-cta:focus-visible{background:var(--blue-hot)}
+@media(max-width:640px){.nav-links a:not(.nav-cta){display:none}}
+
+/* ================= HERO ================= */
+header.hero{
+  position:relative;min-height:92vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;padding:80px 24px 110px;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 118%, rgba(46,100,255,.22), transparent 60%),
+    var(--ink);
+}
+#candyfield{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:26px}
+.hero-kicker{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.34em;font-size:.85rem;color:var(--dim);
+}
+.hero-kicker b{color:var(--blue-hot);font-weight:600}
+.wordmark{font-size:clamp(4rem,14vw,9.5rem);line-height:.92;font-weight:400}
+.wordmark .l1{display:block;font-family:'Marker';color:var(--paper);text-shadow:0 4px 40px rgba(0,0,0,.6)}
+.wordmark .l2{display:block;font-family:'Marker';color:var(--blue-hot);margin-top:-.08em;transform:rotate(-1.5deg);text-shadow:0 0 60px rgba(46,100,255,.45)}
+.hero-slogan{
+  font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;
+  letter-spacing:.06em;font-size:clamp(1.2rem,3vw,1.7rem);color:var(--paper);
+  margin-top:-6px;
+}
+.hero-slogan .pop{color:var(--blue-hot)}
+.hero-sub{max-width:34ch;color:var(--dim);font-size:1.06rem}
+.hero-sub strong{color:var(--paper);font-weight:600}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-block;text-decoration:none;border-radius:3px;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.08em;font-size:1.05rem;padding:13px 28px 14px;
+  transition:transform .12s,background .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover,.btn-blue:focus-visible{background:var(--blue-hot)}
+.btn-ghost{border:1.5px solid var(--ink-3);color:var(--paper)}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--dim)}
+.hero-net{
+  position:absolute;bottom:26px;left:0;right:0;z-index:2;
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.28em;font-size:.72rem;color:#5A5A64;
+}
+
+/* ================= MARQUEE ================= */
+.marquee{
+  border-top:1px solid var(--ink-3);border-bottom:1px solid var(--ink-3);
+  background:var(--blue);color:#fff;overflow:hidden;white-space:nowrap;
+  padding:11px 0;transform:rotate(-.6deg) scale(1.02);
+}
+.marquee-track{display:inline-block;animation:slide 26s linear infinite}
+.marquee span{
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.1em;font-size:1.05rem;padding:0 18px;
+}
+.marquee span::after{content:"✦";margin-left:36px;font-style:normal;opacity:.7}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* ================= SECTIONS ================= */
+section{padding:104px 0}
+.sec-head{display:flex;flex-direction:column;gap:14px;margin-bottom:54px}
+
+/* ---- what it is ---- */
+.what{border-bottom:1px solid var(--ink-3)}
+.what-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+@media(max-width:820px){.what-grid{grid-template-columns:1fr;gap:40px}}
+.what p{color:var(--dim);max-width:52ch}
+.what p+p{margin-top:1em}
+.what p strong{color:var(--paper);font-weight:600}
+.steps{display:flex;flex-direction:column;gap:0;border:1px solid var(--ink-3);border-radius:6px;overflow:hidden}
+.step{display:flex;align-items:center;gap:20px;padding:22px 24px;background:var(--ink-2)}
+.step+.step{border-top:1px solid var(--ink-3)}
+.step-word{
+  font-family:'Marker';font-size:1.5rem;min-width:5.2ch;
+}
+.step:nth-child(1) .step-word{color:var(--paper)}
+.step:nth-child(2) .step-word{color:var(--blue-hot)}
+.step:nth-child(3) .step-word{color:var(--pink)}
+.step p{color:var(--dim);font-size:.95rem;margin:0}
+
+/* ---- flavors ---- */
+.flavors{background:linear-gradient(180deg,var(--ink) 0%,#0D0D12 100%)}
+.flavor-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:980px){.flavor-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.flavor-grid{grid-template-columns:1fr}}
+.flavor{
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:8px;
+  padding:26px 22px 24px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .18s,border-color .18s;
+}
+.flavor:hover{transform:translateY(-5px)}
+.flavor canvas{width:100%;height:auto;display:block}
+.flavor-tag{
+  align-self:flex-start;color:#fff;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.06em;font-size:.98rem;padding:5px 14px 6px;border-radius:2px;
+  transform:rotate(-2deg);
+}
+.flavor h3{
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  font-size:1.5rem;line-height:1;
+}
+.flavor p{color:var(--dim);font-size:.92rem}
+.f-red   .flavor-tag{background:var(--red)}   .f-red:hover{border-color:var(--red)}
+.f-blue  .flavor-tag{background:var(--blue)}  .f-blue:hover{border-color:var(--blue)}
+.f-green .flavor-tag{background:var(--green);color:#101204} .f-green:hover{border-color:var(--green)}
+.f-pink  .flavor-tag{background:var(--pink)}  .f-pink:hover{border-color:var(--pink)}
+.flavor-note{margin-top:26px;color:#5A5A64;font-size:.85rem;text-align:center}
+
+/* ---- different ---- */
+.diff{border-top:1px solid var(--ink-3);border-bottom:1px solid var(--ink-3)}
+.diff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:980px){.diff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.diff-grid{grid-template-columns:1fr}}
+.diff-card{border-left:2px solid var(--blue);padding:6px 0 6px 20px;display:flex;flex-direction:column;gap:8px}
+.diff-card h3{
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  font-size:1.3rem;line-height:1.05;
+}
+.diff-card p{color:var(--dim);font-size:.93rem}
+.small-biz{
+  margin-top:56px;background:var(--pink);color:#fff;border-radius:6px;
+  padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  transform:rotate(-.5deg);
+}
+.small-biz .marker{font-size:1.5rem}
+.small-biz p{font-weight:600;font-size:.98rem;max-width:46ch}
+
+/* ---- freek list signup ---- */
+.freeklist{background:var(--blue);color:#fff;padding:84px 0;transform:rotate(-.5deg) scale(1.01)}
+.freeklist-inner{display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;transform:rotate(.5deg)}
+.freeklist .eyebrow{color:rgba(255,255,255,.75)}
+.freeklist h2{
+  font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:clamp(2.2rem,5.5vw,3.6rem);line-height:.95;
+}
+.freeklist h2 .marker{font-style:normal;text-transform:none;color:var(--ink);font-size:.92em}
+.freeklist p{max-width:44ch;color:rgba(255,255,255,.85)}
+.signup{display:flex;gap:10px;width:100%;max-width:520px;margin-top:8px}
+@media(max-width:520px){.signup{flex-direction:column}}
+.signup input{
+  flex:1;background:rgba(0,0,0,.28);border:1.5px solid rgba(255,255,255,.35);
+  color:#fff;border-radius:3px;padding:13px 16px;font-size:1rem;
+}
+.signup input::placeholder{color:rgba(255,255,255,.55)}
+.signup input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.signup button{
+  border:0;cursor:pointer;background:var(--ink);color:#fff;border-radius:3px;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.08em;font-size:1.02rem;padding:13px 26px;
+  transition:background .15s,transform .12s;
+}
+.signup button:hover{background:#000}
+.signup button:active{transform:scale(.97)}
+.signup-msg{min-height:1.4em;font-weight:600;font-size:.95rem}
+.signup-msg.ok{color:#fff}
+.signup-msg.err{color:#FFD3D3}
+
+/* ---- contact ---- */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+@media(max-width:820px){.contact-grid{grid-template-columns:1fr;gap:44px}}
+.contact-copy p{color:var(--dim);max-width:46ch}
+.contact-copy p+p{margin-top:1em}
+.contact-copy strong{color:var(--paper);font-weight:600}
+.contact-lines{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.contact-line{display:flex;align-items:baseline;gap:14px}
+.contact-line .lbl{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.18em;font-size:.75rem;color:var(--dim);min-width:74px;
+}
+.contact-line a{color:var(--paper);text-decoration:none;font-weight:600}
+.contact-line a:hover{color:var(--blue-hot)}
+form{
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:8px;
+  padding:30px 28px;display:flex;flex-direction:column;gap:18px;
+}
+label{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.16em;font-size:.75rem;color:var(--dim);
+  display:flex;flex-direction:column;gap:7px;
+}
+input,select,textarea{
+  font-family:'Barlow';font-size:1rem;color:var(--paper);
+  background:var(--ink);border:1px solid var(--ink-3);border-radius:4px;
+  padding:11px 13px;width:100%;
+}
+input:focus-visible,select:focus-visible,textarea:focus-visible,
+.btn:focus-visible,a:focus-visible,button:focus-visible{
+  outline:2px solid var(--blue-hot);outline-offset:2px;
+}
+textarea{resize:vertical;min-height:110px}
+form button{
+  border:0;cursor:pointer;margin-top:4px;
+  background:var(--blue);color:#fff;border-radius:3px;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.08em;font-size:1.05rem;padding:14px 28px;
+  transition:background .15s,transform .12s;
+}
+form button:hover{background:var(--blue-hot)}
+form button:active{transform:scale(.98)}
+.form-hint{color:#5A5A64;font-size:.82rem;margin-top:-6px}
+.form-msg{font-weight:600;font-size:.95rem;min-height:0;margin:-6px 0}
+.form-msg.ok{color:var(--green)}
+.form-msg.err{color:var(--pink)}
+
+/* ---- footer ---- */
+footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.foot-logo{font-family:'Marker';font-size:1.3rem}
+.foot-logo span{color:var(--blue-hot)}
+.foot small{color:#5A5A64;font-size:.8rem;display:block;margin-top:6px;max-width:52ch}
+.socials{display:flex;gap:18px}
+.socials a{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.8rem;color:var(--dim);text-decoration:none;
+}
+.socials a:hover{color:var(--paper)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#top">FREEZE <span>FREEKS</span></a>
+  <div class="nav-links">
+    <a href="#flavors">Flavors</a>
+    <a href="#different">Why Us</a>
+    <a class="nav-cta" href="#contact">Get Candy</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="candyfield" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="hero-kicker">Tear. Pour. <b>Crunch.</b></p>
+    <h1 class="wordmark"><span class="l1">FREEZE</span><span class="l2">FREEKS</span></h1>
+    <p class="hero-slogan">Crunch Like a <span class="pop">Freek.</span></p>
+    <p class="hero-sub"><strong>Freeze dried candy.</strong> Your favorite candy, freeze dried until it's light, airy, and loud — same bold flavor, all-new extreme crunch.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-blue" href="#contact">Get Some Candy</a>
+      <a class="btn btn-ghost" href="#flavors">See the Flavors</a>
+    </div>
+  </div>
+  <p class="hero-net">Net Wt. 2.5 oz (71g) — Resealable Stand-Up Pouch</p>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="mtrack">
+    <span>Crunch Like a Freek</span><span>Bold Flavor</span><span>Extreme Crunch</span><span>Real Candy</span><span>Tear. Pour. Crunch.</span><span>Made by Freeks</span>
+  </div>
+</div>
+
+<section class="what">
+  <div class="wrap what-grid">
+    <div>
+      <div class="sec-head" style="margin-bottom:26px">
+        <p class="eyebrow">What We Do</p>
+        <h2 class="headline">Real Candy.<br><span class="pop">Unreal Crunch.</span></h2>
+      </div>
+      <p>We take the candy you already love — Skittles, Jolly Ranchers, and more — and freeze dry it. The moisture leaves. The flavor stays. What's left is <strong>light, crispy, melt-in-your-mouth candy</strong> that hits harder than the original.</p>
+      <p>Every batch is freeze dried by us, packed by us, and sealed in a matte-black resealable pouch so it stays crunchy from the first piece to the last. <strong>Stay fresh. Snack more. Anytime.</strong></p>
+    </div>
+    <div class="steps" role="list">
+      <div class="step" role="listitem"><span class="step-word">TEAR</span><p>Rip open the pouch. That's the last quiet moment you'll get.</p></div>
+      <div class="step" role="listitem"><span class="step-word">POUR</span><p>Light and airy — a 2.5 oz pouch holds a ridiculous amount of crunch.</p></div>
+      <div class="step" role="listitem"><span class="step-word">CRUNCH</span><p>Crispy shell, instant flavor, melts in your mouth. Repeat until empty.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="flavors" id="flavors">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">The Lineup</p>
+      <h2 class="headline">Bold Flavor. <span class="pop">Extreme Crunch.</span></h2>
+    </div>
+    <div class="flavor-grid">
+      <article class="flavor f-red">
+        <canvas width="360" height="220" data-flavor="red" data-img="/img/skittles.jpg" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Skittles</span>
+        <h3>Original Skittles</h3>
+        <p>The rainbow, puffed and crunchified. Every color, twice as loud.</p>
+      </article>
+      <article class="flavor f-blue">
+        <canvas width="360" height="220" data-flavor="blue" data-img="/img/jr-original.jpg" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Jolly Ranchers</span>
+        <h3>Jolly Ranchers Original</h3>
+        <p>Hard candy goes airy. Original flavors, zero jaw workout.</p>
+      </article>
+      <article class="flavor f-green">
+        <canvas width="360" height="220" data-flavor="green" data-img="/img/sour-skittles.jpg" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Sour Skittles</span>
+        <h3>Sour Skittles</h3>
+        <p>Sour. Sweet. Gone. The pucker survives the freeze.</p>
+      </article>
+      <article class="flavor f-pink">
+        <canvas width="360" height="220" data-flavor="pink" data-img="/img/watermelon.jpg" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Watermelon</span>
+        <h3>Jolly Ranchers Watermelon</h3>
+        <p>All watermelon, all the time. The fan favorite, freeze dried.</p>
+      </article>
+    </div>
+    <p class="flavor-note">Small batches — the lineup rotates. Ask us what's fresh out of the freeze dryer.</p>
+  </div>
+</section>
+
+<section class="diff" id="different">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Why Freeze Freeks</p>
+      <h2 class="headline">Made to <span class="pop">Crunch.</span></h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <h3>100% Freeze Dried</h3>
+        <p>Locks in flavor and crunch. Every piece is freeze dried to perfection — no shortcuts, no oven tricks.</p>
+      </div>
+      <div class="diff-card">
+        <h3>Light &amp; Airy</h3>
+        <p>That satisfying melt-in-your-mouth texture you can't resist. Crispy outside, gone in a second.</p>
+      </div>
+      <div class="diff-card">
+        <h3>Real Candy</h3>
+        <p>The same name-brand flavors you already love — now lighter, louder, and crunchier.</p>
+      </div>
+      <div class="diff-card">
+        <h3>Resealable Pouch</h3>
+        <p>Matte-black stand-up pouch with a zipper that keeps every piece crisp. Stay fresh. Snack more. Anytime.</p>
+      </div>
+    </div>
+    <div class="small-biz">
+      <span class="marker">Made by Freeks.</span>
+      <p>We're a small business, and every pouch you grab keeps the freeze dryer running. Thank you for supporting us — extreme crunch. Always.</p>
+    </div>
+  </div>
+</section>
+
+<section class="freeklist" id="freeklist">
+  <div class="wrap freeklist-inner">
+    <p class="eyebrow">The Freek List</p>
+    <h2>Get on the <span class="marker">Freek List.</span></h2>
+    <p>New flavors, fresh batches, and restock alerts — straight to your inbox. No spam, just crunch.</p>
+    <form class="signup" id="signupform" novalidate>
+      <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required aria-label="Email address">
+      <button type="submit">Join the List</button>
+    </form>
+    <p class="signup-msg" id="signupmsg" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <div class="sec-head" style="margin-bottom:26px">
+        <p class="eyebrow">No Store. No Checkout.</p>
+        <h2 class="headline">Want Candy?<br><span class="pop">Just Ask.</span></h2>
+      </div>
+      <p>We keep it simple: <strong>reach out, tell us what you want, and we'll get you candy.</strong> Single pouches, mixed packs, party orders, events — if it crunches, we can make it happen.</p>
+      <p>DM us or send a message with the form. We usually reply within a day.</p>
+      <div class="contact-lines">
+        <div class="contact-line"><span class="lbl">TikTok</span><a href="https://www.tiktok.com/@freezefreeks" rel="noopener">@freezefreeks</a></div>
+        <div class="contact-line"><span class="lbl">Instagram</span><a href="https://www.instagram.com/freezefreeks" rel="noopener">@freezefreeks</a></div>
+        <div class="contact-line"><span class="lbl">YouTube</span><a href="https://www.youtube.com/@freezefreeks" rel="noopener">@freezefreeks</a></div>
+      </div>
+    </div>
+    <form id="orderform">
+      <label>Your Name
+        <input type="text" name="name" autocomplete="name" required>
+      </label>
+      <label>Your Email
+        <input type="email" name="email" autocomplete="email" required>
+      </label>
+      <label>What are you craving?
+        <select name="flavor">
+          <option>Original Skittles</option>
+          <option>Jolly Ranchers Original</option>
+          <option>Sour Skittles</option>
+          <option>Jolly Ranchers Watermelon</option>
+          <option>Mix it up — surprise me</option>
+        </select>
+      </label>
+      <label>Message
+        <textarea name="msg" placeholder="How many pouches? Party order? Just say hi?"></textarea>
+      </label>
+      <button type="submit">Send It →</button>
+      <p class="form-msg" id="ordermsg" role="status" aria-live="polite"></p>
+      <p class="form-hint">Goes straight to us — leave your email and we'll get back to you within a day.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <p class="foot-logo">FREEZE <span>FREEKS</span></p>
+      <small>Crunch Like a Freek.™ · Freeze dried candy — extreme crunch, intense flavor, unreal experience. · Not affiliated with the brands of the candies we freeze dry.</small>
+    </div>
+    <div class="socials">
+      <a href="https://www.tiktok.com/@freezefreeks" rel="noopener">TikTok</a>
+      <a href="https://www.instagram.com/freezefreeks" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@freezefreeks" rel="noopener">YouTube</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ================= freeze-dried candy renderer =================
+   Each piece is pre-rendered once to an offscreen sprite:
+   - irregular lobed silhouette (puffed, popcorn-like)
+   - chalky speckle + big sphere shading
+   - deep craters with lit far rims (pumice / honeycomb look)
+   Glossy "unpuffed" lentils are mixed in for before/after contrast. */
+
+function shade(hex,amt){
+  const n=parseInt(hex.slice(1),16);
+  let r=(n>>16)+amt,g=((n>>8)&255)+amt,b=(n&255)+amt;
+  r=Math.max(0,Math.min(255,r));g=Math.max(0,Math.min(255,g));b=Math.max(0,Math.min(255,b));
+  return 'rgb('+r+','+g+','+b+')';
+}
+// deterministic prng so pieces render identically every load
+function prng(seed){let s=seed;return function(){s=(s*16807)%2147483647;return (s-1)/2147483646}}
+
+const TAU=Math.PI*2;
+
+/* puffed freeze-dried piece → offscreen canvas sprite */
+function candySprite(r,color,seed){
+  const rnd=prng(seed);
+  const S=Math.ceil(r*2*1.45);
+  const cv=document.createElement('canvas');cv.width=cv.height=S;
+  const c=cv.getContext('2d');
+  const cx=S/2,cy=S/2;
+
+  // --- irregular puffed silhouette: core + lobes ---
+  const lobes=[[0,0,r*.8]];
+  const n=8+Math.floor(rnd()*4);
+  for(let i=0;i<n;i++){
+    const a=(i/n)*TAU+rnd()*.6;
+    const d=r*(.48+rnd()*.3);
+    lobes.push([Math.cos(a)*d,Math.sin(a)*d,r*(.26+rnd()*.24)]);
+  }
+  for(const[lx,ly,lr]of lobes){
+    const g=c.createRadialGradient(cx+lx-lr*.4,cy+ly-lr*.4,lr*.1,cx+lx,cy+ly,lr);
+    g.addColorStop(0,shade(color,26));
+    g.addColorStop(.7,color);
+    g.addColorStop(1,shade(color,-22));
+    c.beginPath();c.arc(cx+lx,cy+ly,lr,0,TAU);c.fillStyle=g;c.fill();
+  }
+
+  // everything below clips to the silhouette
+  c.globalCompositeOperation='source-atop';
+
+  // --- chalky matte speckle ---
+  for(let i=0;i<170;i++){
+    const a=rnd()*TAU,d=Math.sqrt(rnd())*r*1.05;
+    c.beginPath();c.arc(cx+Math.cos(a)*d,cy+Math.sin(a)*d,.4+rnd()*1.4,0,TAU);
+    c.fillStyle=rnd()<.55?'rgba(255,255,255,.09)':'rgba(0,0,0,.09)';
+    c.fill();
+  }
+
+  // --- overall sphere form (light from top-left) ---
+  let g=c.createRadialGradient(cx-r*.45,cy-r*.5,r*.1,cx,cy,r*1.2);
+  g.addColorStop(0,'rgba(255,255,255,.30)');
+  g.addColorStop(.45,'rgba(255,255,255,0)');
+  g.addColorStop(.78,'rgba(0,0,0,.16)');
+  g.addColorStop(1,'rgba(0,0,0,.48)');
+  c.fillStyle=g;c.fillRect(0,0,S,S);
+
+  // --- craters: the signature freeze-dried holes ---
+  const holes=16+Math.floor(rnd()*10);
+  for(let i=0;i<holes;i++){
+    const a=rnd()*TAU,d=Math.sqrt(rnd())*r*.88;
+    const hx=cx+Math.cos(a)*d,hy=cy+Math.sin(a)*d;
+    const hr=r*(.055+rnd()*.09)*(rnd()<.14?1.7:1);
+    // interior: near-black tinted pit fading to dark candy
+    const hg=c.createRadialGradient(hx+hr*.15,hy+hr*.15,0,hx,hy,hr);
+    hg.addColorStop(0,shade(color,-110));
+    hg.addColorStop(.6,shade(color,-78));
+    hg.addColorStop(1,shade(color,-38));
+    c.beginPath();c.arc(hx,hy,hr,0,TAU);c.fillStyle=hg;c.fill();
+    // shadowed near rim (top-left inner wall)
+    c.beginPath();c.arc(hx,hy,hr*.82,Math.PI*.8,Math.PI*1.7);
+    c.strokeStyle='rgba(0,0,0,.38)';c.lineWidth=Math.max(.6,hr*.22);c.stroke();
+    // lit far rim (bottom-right edge catches the light)
+    c.beginPath();c.arc(hx,hy,hr*.96,-Math.PI*.15,Math.PI*.65);
+    c.strokeStyle='rgba(255,255,255,.30)';c.lineWidth=Math.max(.5,hr*.15);c.stroke();
+  }
+
+  // a few shallow dimples between craters
+  for(let i=0;i<7;i++){
+    const a=rnd()*TAU,d=Math.sqrt(rnd())*r*.8;
+    c.beginPath();c.arc(cx+Math.cos(a)*d,cy+Math.sin(a)*d,r*(.05+rnd()*.06),0,TAU);
+    c.fillStyle='rgba(0,0,0,.14)';c.fill();
+  }
+
+  c.globalCompositeOperation='source-over';
+  return cv;
+}
+
+/* glossy unpuffed candy lentil (the "before" piece) */
+function lentilSprite(r,color,seed){
+  const rnd=prng(seed);
+  const S=Math.ceil(r*2.4);
+  const cv=document.createElement('canvas');cv.width=cv.height=S;
+  const c=cv.getContext('2d');
+  const cx=S/2,cy=S/2;
+  // candy shell
+  let g=c.createRadialGradient(cx-r*.35,cy-r*.4,r*.1,cx,cy,r);
+  g.addColorStop(0,shade(color,55));
+  g.addColorStop(.45,shade(color,10));
+  g.addColorStop(.85,color);
+  g.addColorStop(1,shade(color,-55));
+  c.beginPath();c.arc(cx,cy,r,0,TAU);c.fillStyle=g;c.fill();
+  // hard-shell specular
+  c.beginPath();c.ellipse(cx-r*.32,cy-r*.42,r*.34,r*.18,-.6,0,TAU);
+  c.fillStyle='rgba(255,255,255,.85)';c.fill();
+  c.beginPath();c.ellipse(cx+r*.3,cy+r*.45,r*.16,r*.08,-.6,0,TAU);
+  c.fillStyle='rgba(255,255,255,.25)';c.fill();
+  // subtle edge ring
+  c.beginPath();c.arc(cx,cy,r*.97,0,TAU);
+  c.strokeStyle='rgba(0,0,0,.18)';c.lineWidth=r*.06;c.stroke();
+  return cv;
+}
+
+/* candy-accurate palettes */
+const PALETTES={
+  red:  ['#E2372B','#F28C1E','#F2CF2D','#7DBB3C','#8348C4'],          // skittles rainbow
+  blue: ['#2E64FF','#D8332A','#8348C4','#7DBB3C','#F0608F'],          // JR: blue razz, cherry, grape, apple, watermelon
+  green:['#8FC93A','#F2CF2D','#F28C1E','#B7D437','#E2372B'],          // sour mix
+  pink: ['#F0608F','#EE3D6E','#F48FB1','#A8D96C','#EE3D6E']           // watermelon pinks + rind green
+};
+
+/* ---------- hero: drifting freeze-dried candy field ---------- */
+(function(){
+  const cv=document.getElementById('candyfield'),ctx=cv.getContext('2d');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const all=[].concat(PALETTES.red,['#2E64FF','#F0608F','#EE3D6E']);
+  let W,H,orbs=[],dpr=Math.min(2,devicePixelRatio||1);
+  function seedOrbs(){
+    const rnd=prng(1234);
+    orbs=[];
+    const n=Math.max(8,Math.min(16,Math.round(W/110)));
+    for(let i=0;i<n;i++){
+      const r=15+rnd()*30;
+      const seed=1000+Math.floor(rnd()*90000);
+      const color=all[Math.floor(rnd()*all.length)];
+      // ~1 in 6 pieces is a glossy unpuffed lentil, smaller than the puffed ones
+      const lentil=rnd()<.17;
+      const rr=lentil?r*.45:r;
+      orbs.push({
+        x:rnd()*W, y:rnd()*H, r:rr,
+        sprite:lentil?lentilSprite(rr*2,color,seed):candySprite(rr*2,color,seed),
+        vx:(rnd()-.5)*.22, vy:-.12-rnd()*.22,
+        rot:rnd()*TAU, vr:(rnd()-.5)*.006,
+        wob:rnd()*TAU, ws:.003+rnd()*.004
+      });
+    }
+  }
+  function resize(){
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*dpr;cv.height=H*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    seedOrbs();
+    if(reduced)paint();
+  }
+  function paint(){
+    ctx.clearRect(0,0,W,H);
+    for(const o of orbs){
+      const w=o.sprite.width/2; // sprites are rendered at 2x for crispness
+      ctx.save();
+      ctx.translate(o.x,o.y);ctx.rotate(o.rot);
+      ctx.globalAlpha=.92;
+      ctx.drawImage(o.sprite,-w/2,-w/2,w,w);
+      ctx.restore();
+    }
+  }
+  function tick(){
+    for(const o of orbs){
+      o.wob+=o.ws;o.rot+=o.vr;
+      o.x+=o.vx+Math.sin(o.wob)*.15;
+      o.y+=o.vy;
+      if(o.y<-o.r*2.5){o.y=H+o.r*2.5;o.x=Math.random()*W}
+      if(o.x<-o.r*2.5)o.x=W+o.r;if(o.x>W+o.r*2.5)o.x=-o.r;
+    }
+    paint();
+    requestAnimationFrame(tick);
+  }
+  addEventListener('resize',resize);
+  resize();
+  if(!reduced)requestAnimationFrame(tick);
+})();
+
+/* ---------- flavor cards: static candy clusters ---------- */
+document.querySelectorAll('.flavor canvas').forEach(function(cv,ci){
+  const ctx=cv.getContext('2d');
+  const flavor=cv.dataset.flavor;
+  const pal=PALETTES[flavor];
+  const W=cv.width,H=cv.height;
+  const rnd=prng(777+ci*131);
+
+  // soft ground shadow so the pile sits on something
+  const sg=ctx.createRadialGradient(W*.5,H*.82,10,W*.5,H*.82,W*.42);
+  sg.addColorStop(0,'rgba(0,0,0,.35)');sg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=sg;
+  ctx.save();ctx.translate(0,H*.55);ctx.scale(1,.35);
+  ctx.beginPath();ctx.arc(W*.5,H*.82,W*.42,0,TAU);ctx.fill();ctx.restore();
+
+  // pile of puffed pieces, back to front
+  const spots=[[W*.24,H*.42,42],[W*.66,H*.36,38],[W*.45,H*.55,50],[W*.82,H*.62,36],[W*.18,H*.68,34],[W*.55,H*.74,30]];
+  spots.forEach(function(s,i){
+    const sp=candySprite(s[2]*2,pal[i%pal.length],500+ci*97+i*31);
+    const w=sp.width/2;
+    ctx.save();ctx.translate(s[0],s[1]);ctx.rotate((rnd()-.5)*.9);
+    ctx.drawImage(sp,-w/2,-w/2,w,w);ctx.restore();
+  });
+
+  // the Skittles-based flavors get a couple glossy unpuffed pieces for contrast
+  if(flavor==='red'||flavor==='green'){
+    [[W*.88,H*.86,13],[W*.1,H*.88,11],[W*.72,H*.9,10]].forEach(function(s,i){
+      const sp=lentilSprite(s[2]*2,pal[(i+1)%pal.length],900+ci*53+i*17);
+      const w=sp.width/2;
+      ctx.drawImage(sp,s[0]-w/2,s[1]-w/2,w,w);
+    });
+  }
+
+  // crumbs
+  for(let i=0;i<12;i++){
+    ctx.beginPath();
+    ctx.arc(rnd()*W,H*.6+rnd()*H*.38,1.2+rnd()*2.6,0,TAU);
+    ctx.fillStyle=pal[Math.floor(rnd()*pal.length)];
+    ctx.globalAlpha=.55;ctx.fill();ctx.globalAlpha=1;
+  }
+});
+
+
+/* ---------- real product photos (drop files in /public/img) ----------
+   skittles.jpg, jr-original.jpg, sour-skittles.jpg, watermelon.jpg -> flavor cards
+   hero.jpg -> hero backdrop. Canvas art is the fallback until photos exist. */
+document.querySelectorAll('.flavor canvas[data-img]').forEach(function(cv){
+  const img=new Image();
+  img.onload=function(){
+    const el=document.createElement('img');
+    el.src=cv.dataset.img;el.alt='';
+    el.style.cssText='width:100%;height:auto;display:block;border-radius:6px;object-fit:cover;aspect-ratio:360/220';
+    cv.replaceWith(el);
+  };
+  img.src=cv.dataset.img;
+});
+(function(){
+  const img=new Image();
+  img.onload=function(){
+    const hero=document.querySelector('header.hero');
+    hero.style.backgroundImage='linear-gradient(rgba(11,11,13,.72),rgba(11,11,13,.88)),url(/img/hero.jpg)';
+    hero.style.backgroundSize='cover';hero.style.backgroundPosition='center';
+    document.getElementById('candyfield').style.display='none';
+  };
+  img.src='/img/hero.jpg';
+})();
+
+/* ---------- marquee: duplicate track for seamless loop ---------- */
+(function(){
+  const t=document.getElementById('mtrack');
+  t.innerHTML+=t.innerHTML;
+})();
+
+/* ---------- freek list signup → backend ---------- */
+document.getElementById('signupform').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const input=e.target.email,msg=document.getElementById('signupmsg');
+  const email=input.value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    msg.textContent='That email doesn’t look right — check it and try again.';
+    msg.className='signup-msg err';return;
+  }
+  try{
+    const res=await fetch('/api/signup',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,source:'freek-list'})
+    });
+    const data=await res.json();
+    if(res.ok){
+      msg.textContent=data.duplicate?'You’re already on the list — crunch incoming.':'You’re in! Welcome to the Freek List. 🥶';
+      msg.className='signup-msg ok';
+      e.target.reset();
+    }else{
+      msg.textContent=data.error||'Something went wrong — try again in a second.';
+      msg.className='signup-msg err';
+    }
+  }catch(err){
+    msg.textContent='Couldn’t reach the server — try again in a second.';
+    msg.className='signup-msg err';
+  }
+});
+
+/* ---------- contact form → backend ---------- */
+document.getElementById('orderform').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const f=e.target,msg=document.getElementById('ordermsg');
+  try{
+    const res=await fetch('/api/contact',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name:f.name.value,email:f.email.value,flavor:f.flavor.value,msg:f.msg.value})
+    });
+    const data=await res.json();
+    if(res.ok){
+      msg.textContent='Got it! We’ll get back to you soon — stay crunchy.';
+      msg.className='form-msg ok';
+      f.reset();
+    }else{
+      msg.textContent=data.error||'Something went wrong — try again in a second.';
+      msg.className='form-msg err';
+    }
+  }catch(err){
+    msg.textContent='Couldn’t reach the server — try again in a second.';
+    msg.className='form-msg err';
+  }
+});
+</script>
+</body>
+</html>

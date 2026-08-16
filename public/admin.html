@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Freek List Admin — FREEZE FREEKS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Marker';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/marker.ttf) format('truetype')}
+@font-face{font-family:'Barlow Condensed';font-style:italic;font-weight:800;font-display:swap;src:url(/fonts/bc800i.ttf) format('truetype')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/bc600.ttf) format('truetype')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/b400.ttf) format('truetype')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/b600.ttf) format('truetype')}
+
+:root{
+  --ink:#0B0B0D;--ink-2:#131318;--ink-3:#1C1C23;
+  --paper:#F4F4F1;--dim:#9C9CA6;
+  --blue:#2E64FF;--blue-hot:#4D7BFF;
+  --pink:#EE3D6E;--green:#96C93D;--red:#E0564C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:'Barlow',system-ui,sans-serif;font-size:16px;line-height:1.5}
+::selection{background:var(--blue);color:#fff}
+a{color:var(--blue-hot)}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+header{border-bottom:1px solid var(--ink-3);padding:18px 0}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{font-family:'Marker';font-size:1.2rem;text-decoration:none;color:var(--paper)}
+.logo span{color:var(--blue-hot)}
+.badge{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.2em;font-size:.72rem;color:var(--ink);background:var(--green);
+  padding:4px 10px;border-radius:2px;
+}
+main{padding:44px 0 80px}
+h1{
+  font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:clamp(1.9rem,4.5vw,2.8rem);line-height:1;margin-bottom:6px;
+}
+.sub{color:var(--dim);font-size:.95rem}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+@media(max-width:860px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.stats{grid-template-columns:1fr}}
+.stat{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:6px;padding:20px 22px}
+.stat .n{
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;font-size:2.4rem;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.stat .l{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.18em;font-size:.72rem;color:var(--dim);margin-top:6px;
+}
+.stat:nth-child(1) .n{color:var(--blue-hot)}
+.stat:nth-child(2) .n{color:var(--pink)}
+.stat:nth-child(3) .n{color:var(--green)}
+.stat:nth-child(4) .n{color:var(--paper)}
+
+.sec-title{
+  font-family:'Barlow Condensed';font-style:italic;font-weight:800;text-transform:uppercase;
+  font-size:1.4rem;margin:44px 0 14px;
+}
+td.msg-body{color:var(--dim);max-width:340px}
+td.msg-body .flavor-pill{
+  display:inline-block;font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.1em;font-size:.7rem;color:var(--pink);border:1px solid rgba(238,61,110,.4);
+  padding:2px 8px;border-radius:99px;margin-bottom:4px;white-space:nowrap;
+}
+
+.toolbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.toolbar input{
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:4px;color:var(--paper);
+  font-family:'Barlow';font-size:.95rem;padding:9px 12px;width:min(320px,100%);
+}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--blue-hot);outline-offset:2px}
+.actions{display:flex;gap:10px}
+.btn{
+  border:0;cursor:pointer;border-radius:3px;text-decoration:none;display:inline-block;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.07em;font-size:.92rem;padding:9px 18px;transition:background .15s;
+}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--blue-hot)}
+.btn-ghost{background:transparent;border:1.5px solid var(--ink-3);color:var(--dim)}
+.btn-ghost:hover{color:var(--paper);border-color:var(--dim)}
+
+.table-card{background:var(--ink-2);border:1px solid var(--ink-3);border-radius:8px;overflow:hidden}
+.table-scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th{
+  text-align:left;font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.16em;font-size:.72rem;color:var(--dim);
+  padding:13px 18px;border-bottom:1px solid var(--ink-3);background:#0F0F13;
+}
+td{padding:13px 18px;border-bottom:1px solid var(--ink-3);font-size:.95rem}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:rgba(46,100,255,.05)}
+td.email{font-weight:600}
+td.when{color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.src span{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;letter-spacing:.1em;
+  font-size:.7rem;color:var(--blue-hot);border:1px solid rgba(77,123,255,.4);
+  padding:2px 8px;border-radius:99px;white-space:nowrap;
+}
+td.del{text-align:right}
+td.del button{
+  background:none;border:0;cursor:pointer;color:#5A5A64;font-size:.85rem;
+  font-family:'Barlow';padding:4px 6px;border-radius:3px;
+}
+td.del button:hover{color:var(--red)}
+.empty{padding:56px 24px;text-align:center;color:var(--dim)}
+.empty .marker{font-family:'Marker';font-size:1.25rem;color:var(--paper);display:block;margin-bottom:8px}
+.foot-note{color:#5A5A64;font-size:.8rem;margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head-row">
+    <a class="logo" href="/">FREEZE <span>FREEKS</span></a>
+    <span class="badge">Admin</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>The Freek List</h1>
+  <p class="sub">Everyone who signed up for candy drops, restocks, and news.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="n" id="stat-total">—</div><div class="l">Total Signups</div></div>
+    <div class="stat"><div class="n" id="stat-week">—</div><div class="l">Last 7 Days</div></div>
+    <div class="stat"><div class="n" id="stat-today">—</div><div class="l">Today</div></div>
+    <div class="stat"><div class="n" id="stat-msgs">—</div><div class="l">Messages</div></div>
+  </div>
+
+  <div class="toolbar">
+    <input type="search" id="filter" placeholder="Search emails…" aria-label="Search emails">
+    <div class="actions">
+      <button class="btn btn-ghost" id="refresh">Refresh</button>
+      <button class="btn btn-blue" id="export">Export CSV</button>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-scroll">
+      <table id="tbl" hidden>
+        <thead><tr><th>Email</th><th>Signed Up</th><th>Source</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="empty">
+      <span class="marker">No freeks yet.</span>
+      Signups from the site land here the moment they hit “Join the List.”
+    </div>
+  </div>
+  <h2 class="sec-title">Candy Requests</h2>
+  <div class="table-card">
+    <div class="table-scroll">
+      <table id="msg-tbl" hidden>
+        <thead><tr><th>From</th><th>Message</th><th>Received</th><th></th></tr></thead>
+        <tbody id="msg-rows"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="msg-empty">
+      <span class="marker">No requests yet.</span>
+      Contact-form messages from the site land here — name, email, and what they're craving.
+    </div>
+  </div>
+
+  <p class="foot-note">Local admin view — anyone who can reach this server can see this page. Put it behind a login before hosting it publicly.</p>
+</main>
+
+<script>
+let all=[],msgs=[];
+const fmt=new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'});
+
+async function load(){
+  const [a,b]=await Promise.all([fetch('/api/signups'),fetch('/api/messages')]);
+  all=await a.json();msgs=await b.json();
+  render();renderMsgs();
+}
+
+function renderMsgs(){
+  const rows=document.getElementById('msg-rows');
+  document.getElementById('stat-msgs').textContent=msgs.length;
+  rows.innerHTML='';
+  for(const m of msgs){
+    const tr=document.createElement('tr');
+    const tdF=document.createElement('td');tdF.className='email';
+    tdF.textContent=m.name;
+    const em=document.createElement('div');em.style.cssText='font-weight:400;color:var(--dim);font-size:.85rem';
+    em.textContent=m.email;tdF.appendChild(em);
+    const tdM=document.createElement('td');tdM.className='msg-body';
+    if(m.flavor){const p=document.createElement('span');p.className='flavor-pill';p.textContent=m.flavor;tdM.appendChild(p);tdM.appendChild(document.createElement('br'))}
+    tdM.appendChild(document.createTextNode(m.msg||'—'));
+    const tdW=document.createElement('td');tdW.className='when';tdW.textContent=fmt.format(new Date(m.ts));
+    const tdD=document.createElement('td');tdD.className='del';
+    const btn=document.createElement('button');btn.textContent='Remove';
+    btn.addEventListener('click',async()=>{
+      if(!confirm('Remove this message from '+m.name+'?'))return;
+      await fetch('/api/messages/'+encodeURIComponent(m.id),{method:'DELETE'});
+      load();
+    });
+    tdD.appendChild(btn);
+    tr.append(tdF,tdM,tdW,tdD);
+    rows.appendChild(tr);
+  }
+  document.getElementById('msg-tbl').hidden=msgs.length===0;
+  document.getElementById('msg-empty').style.display=msgs.length===0?'':'none';
+}
+function render(){
+  const q=document.getElementById('filter').value.trim().toLowerCase();
+  const rows=document.getElementById('rows');
+  const list=all.filter(s=>!q||s.email.toLowerCase().includes(q));
+  const now=Date.now(),day=86400000;
+  const startOfToday=new Date();startOfToday.setHours(0,0,0,0);
+  document.getElementById('stat-total').textContent=all.length;
+  document.getElementById('stat-week').textContent=all.filter(s=>now-new Date(s.ts).getTime()<7*day).length;
+  document.getElementById('stat-today').textContent=all.filter(s=>new Date(s.ts)>=startOfToday).length;
+
+  rows.innerHTML='';
+  for(const s of list){
+    const tr=document.createElement('tr');
+    const tdE=document.createElement('td');tdE.className='email';tdE.textContent=s.email;
+    const tdW=document.createElement('td');tdW.className='when';tdW.textContent=fmt.format(new Date(s.ts));
+    const tdS=document.createElement('td');tdS.className='src';
+    const pill=document.createElement('span');pill.textContent=s.source||'site';tdS.appendChild(pill);
+    const tdD=document.createElement('td');tdD.className='del';
+    const btn=document.createElement('button');btn.textContent='Remove';
+    btn.addEventListener('click',async()=>{
+      if(!confirm('Remove '+s.email+' from the list?'))return;
+      await fetch('/api/signups/'+encodeURIComponent(s.email),{method:'DELETE'});
+      load();
+    });
+    tdD.appendChild(btn);
+    tr.append(tdE,tdW,tdS,tdD);
+    rows.appendChild(tr);
+  }
+  document.getElementById('tbl').hidden=list.length===0;
+  document.getElementById('empty').style.display=list.length===0?'':'none';
+  if(list.length===0&&q){
+    document.getElementById('empty').innerHTML='<span class="marker">No matches.</span>No emails match “'+q.replace(/[<>&]/g,'')+'”.';
+  }
+}
+document.getElementById('filter').addEventListener('input',render);
+document.getElementById('refresh').addEventListener('click',load);
+document.getElementById('export').addEventListener('click',()=>{
+  const csv='email,signed_up,source\n'+all.map(s=>`${s.email},${s.ts},${s.source||'site'}`).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='freek-list.csv';a.click();URL.revokeObjectURL(a.href);
+});
+load();
+setInterval(load,15000); // live-ish: refresh every 15s
+</script>
+</body>
+</html>
