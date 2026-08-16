@@ -21,8 +21,8 @@ gitignored — customer data stays local).
 ## Real product photos
 
 Drop photos into `public/img/` and they automatically replace the canvas-drawn
-candy: `hero.jpg`, `skittles.jpg`, `jr-original.jpg`, `sour-skittles.jpg`,
-`watermelon.jpg`.
+candy: `hero.jpg`, `skittles.jpg`, `jr-original.jpg`, `gummy-worms.jpg`,
+`sour-patch-watermelon.jpg`.
 
 ## Note
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>FREEZE FREEKS — Freeze Dried Candy | Crunch Like a Freek.</title>
-<meta name="description" content="FREEZE FREEKS makes freeze dried candy with bold flavor and extreme crunch — freeze dried Skittles, Jolly Ranchers, sour candy and more, in small batches. No store, no checkout: just reach out and get some. Crunch Like a Freek.">
+<meta name="description" content="FREEZE FREEKS makes freeze dried candy with bold flavor and extreme crunch — freeze dried Skittles, Jolly Ranchers, Sour Patch Kids, gummy worms and more, in small batches. No store, no checkout: just reach out and get some. Crunch Like a Freek.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://freezefreeks.com/">
 <meta name="theme-color" content="#0B0B0D">
@@ -77,17 +77,17 @@
         {
           "@type": "Product",
           "position": 3,
-          "name": "Freeze Dried Sour Skittles",
-          "image": "https://freezefreeks.com/img/sour-skittles.jpg",
-          "description": "Sour Skittles, freeze dried — the pucker survives the freeze.",
+          "name": "Freeze Dried Gummy Worms",
+          "image": "https://freezefreeks.com/img/gummy-worms.jpg",
+          "description": "Gummy worms, freeze dried — the chew swapped for a light, crispy crunch.",
           "brand": { "@id": "https://freezefreeks.com/#org" }
         },
         {
           "@type": "Product",
           "position": 4,
-          "name": "Freeze Dried Jolly Ranchers Watermelon",
-          "image": "https://freezefreeks.com/img/watermelon.jpg",
-          "description": "Watermelon Jolly Ranchers, freeze dried — the fan favorite.",
+          "name": "Freeze Dried Sour Patch Kids Watermelon",
+          "image": "https://freezefreeks.com/img/sour-patch-watermelon.jpg",
+          "description": "Sour Patch Kids watermelon slices, freeze dried — the fan favorite.",
           "brand": { "@id": "https://freezefreeks.com/#org" }
         }
       ]
@@ -475,15 +475,15 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
         <p>Hard candy goes airy. Original flavors, zero jaw workout.</p>
       </article>
       <article class="flavor f-green">
-        <canvas width="360" height="220" data-flavor="green" data-img="/img/sour-skittles.jpg" data-alt="Freeze dried sour candy puff in red and yellow" aria-hidden="true"></canvas>
-        <span class="flavor-tag">Sour Skittles</span>
-        <h3>Sour Skittles</h3>
-        <p>Sour. Sweet. Gone. The pucker survives the freeze.</p>
+        <canvas width="360" height="220" data-flavor="green" data-img="/img/gummy-worms.jpg" data-alt="Freeze dried gummy worm in red and yellow" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Gummy Worms</span>
+        <h3>Gummy Worms</h3>
+        <p>Chewy goes crunchy. Every worm puffed light, crispy, and loud.</p>
       </article>
       <article class="flavor f-pink">
-        <canvas width="360" height="220" data-flavor="pink" data-img="/img/watermelon.jpg" data-alt="Freeze dried watermelon Jolly Rancher slice with pink center and green rind" aria-hidden="true"></canvas>
-        <span class="flavor-tag">Watermelon</span>
-        <h3>Jolly Ranchers Watermelon</h3>
+        <canvas width="360" height="220" data-flavor="pink" data-img="/img/sour-patch-watermelon.jpg" data-alt="Freeze dried Sour Patch Kids watermelon slice with pink center and green rind" aria-hidden="true"></canvas>
+        <span class="flavor-tag">Sour Patch Kids</span>
+        <h3>Sour Patch Kids Watermelon</h3>
         <p>All watermelon, all the time. The fan favorite, freeze dried.</p>
       </article>
     </div>
@@ -561,8 +561,8 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
         <select name="flavor">
           <option>Original Skittles</option>
           <option>Jolly Ranchers Original</option>
-          <option>Sour Skittles</option>
-          <option>Jolly Ranchers Watermelon</option>
+          <option>Gummy Worms</option>
+          <option>Sour Patch Kids Watermelon</option>
           <option>Mix it up — surprise me</option>
         </select>
       </label>
@@ -820,7 +820,7 @@ function cutout(img){
 })();
 
 // load the real candy photos and swap them into the animation as they arrive
-['/img/skittles.jpg','/img/jr-original.jpg','/img/sour-skittles.jpg','/img/watermelon.jpg']
+['/img/skittles.jpg','/img/jr-original.jpg','/img/gummy-worms.jpg','/img/sour-patch-watermelon.jpg']
 .forEach(function(src){
   const im=new Image();
   im.onload=function(){CUTOUTS.push(cutout(im));window._heroResprite&&window._heroResprite()};
@@ -871,7 +871,7 @@ document.querySelectorAll('.flavor canvas').forEach(function(cv,ci){
 
 
 /* ---------- real product photos (drop files in /public/img) ----------
-   skittles.jpg, jr-original.jpg, sour-skittles.jpg, watermelon.jpg -> flavor cards
+   skittles.jpg, jr-original.jpg, gummy-worms.jpg, sour-patch-watermelon.jpg -> flavor cards
    hero.jpg -> hero backdrop. Canvas art is the fallback until photos exist. */
 document.querySelectorAll('.flavor canvas[data-img]').forEach(function(cv){
   const img=new Image();
