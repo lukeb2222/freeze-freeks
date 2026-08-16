@@ -616,6 +616,41 @@ const PALETTES={
   pink: ['#F0608F','#EE3D6E','#F48FB1','#A8D96C','#EE3D6E']           // watermelon pinks + rind green
 };
 
+/* ---------- photo cutouts: real candy for the hero animation ----------
+   Flood-fills the white studio background to transparent from the borders
+   inward, so white details INSIDE the candy (the S, sugar frost) survive. */
+const CUTOUTS=[];
+function cutout(img){
+  const S=260, ar=img.naturalHeight/img.naturalWidth;
+  const cv=document.createElement('canvas');
+  cv.width=S;cv.height=Math.round(S*ar);
+  const c=cv.getContext('2d');
+  c.drawImage(img,0,0,cv.width,cv.height);
+  const id=c.getImageData(0,0,cv.width,cv.height),d=id.data,W=cv.width,H=cv.height;
+  const isBg=function(i){const r=d[i],g=d[i+1],b=d[i+2];const mx=Math.max(r,g,b),mn=Math.min(r,g,b);return mx>160&&mx-mn<46};
+  const seen=new Uint8Array(W*H),q=[];
+  for(let x=0;x<W;x++){q.push(x,(H-1)*W+x)}
+  for(let y=0;y<H;y++){q.push(y*W,y*W+W-1)}
+  while(q.length){
+    const pp=q.pop();
+    if(seen[pp])continue;seen[pp]=1;
+    if(!isBg(pp*4))continue;
+    d[pp*4+3]=0;
+    const x=pp%W,y=(pp/W)|0;
+    if(x>0)q.push(pp-1);if(x<W-1)q.push(pp+1);
+    if(y>0)q.push(pp-W);if(y<H-1)q.push(pp+W);
+  }
+  // feather: soften the 1px rim so cut edges don't fringe white
+  const alpha=new Uint8Array(W*H);
+  for(let i=0;i<W*H;i++)alpha[i]=d[i*4+3];
+  for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
+    const i=y*W+x;
+    if(alpha[i]&&(!alpha[i-1]||!alpha[i+1]||!alpha[i-W]||!alpha[i+W]))d[i*4+3]=110;
+  }
+  c.putImageData(id,0,0);
+  return cv;
+}
+
 /* ---------- hero: drifting freeze-dried candy field ---------- */
 (function(){
   const cv=document.getElementById('candyfield'),ctx=cv.getContext('2d');
@@ -630,12 +665,14 @@ const PALETTES={
       const r=15+rnd()*30;
       const seed=1000+Math.floor(rnd()*90000);
       const color=all[Math.floor(rnd()*all.length)];
-      // ~1 in 6 pieces is a glossy unpuffed lentil, smaller than the puffed ones
-      const lentil=rnd()<.17;
+      // real photo cutouts when loaded; drawn candy until then / as fallback
+      const lentil=!CUTOUTS.length&&rnd()<.17;
       const rr=lentil?r*.45:r;
+      const sprite=CUTOUTS.length?CUTOUTS[Math.floor(rnd()*CUTOUTS.length)]
+        :(lentil?lentilSprite(rr*2,color,seed):candySprite(rr*2,color,seed));
       orbs.push({
         x:rnd()*W, y:rnd()*H, r:rr,
-        sprite:lentil?lentilSprite(rr*2,color,seed):candySprite(rr*2,color,seed),
+        sprite:sprite,
         vx:(rnd()-.5)*.22, vy:-.12-rnd()*.22,
         rot:rnd()*TAU, vr:(rnd()-.5)*.006,
         wob:rnd()*TAU, ws:.003+rnd()*.004
@@ -652,11 +689,12 @@ const PALETTES={
   function paint(){
     ctx.clearRect(0,0,W,H);
     for(const o of orbs){
-      const w=o.sprite.width/2; // sprites are rendered at 2x for crispness
+      const s=o.sprite;
+      const w=o.r*2.9, h=w*s.height/s.width; // aspect-aware: photo cutouts aren't square
       ctx.save();
       ctx.translate(o.x,o.y);ctx.rotate(o.rot);
-      ctx.globalAlpha=.92;
-      ctx.drawImage(o.sprite,-w/2,-w/2,w,w);
+      ctx.globalAlpha=.95;
+      ctx.drawImage(s,-w/2,-h/2,w,h);
       ctx.restore();
     }
   }
@@ -674,7 +712,20 @@ const PALETTES={
   addEventListener('resize',resize);
   resize();
   if(!reduced)requestAnimationFrame(tick);
+  window._heroResprite=function(){
+    const rnd=prng(555);
+    for(const o of orbs){o.sprite=CUTOUTS[Math.floor(rnd()*CUTOUTS.length)]}
+    if(reduced)paint();
+  };
 })();
+
+// load the real candy photos and swap them into the animation as they arrive
+['/img/skittles.jpg','/img/jr-original.jpg','/img/sour-skittles.jpg','/img/watermelon.jpg']
+.forEach(function(src){
+  const im=new Image();
+  im.onload=function(){CUTOUTS.push(cutout(im));window._heroResprite&&window._heroResprite()};
+  im.src=src;
+});
 
 /* ---------- flavor cards: static candy clusters ---------- */
 document.querySelectorAll('.flavor canvas').forEach(function(cv,ci){
@@ -727,7 +778,7 @@ document.querySelectorAll('.flavor canvas[data-img]').forEach(function(cv){
   img.onload=function(){
     const el=document.createElement('img');
     el.src=cv.dataset.img;el.alt='';
-    el.style.cssText='width:100%;height:auto;display:block;border-radius:6px;object-fit:cover;aspect-ratio:360/220';
+    el.style.cssText='width:100%;height:auto;display:block;border-radius:6px;object-fit:contain;aspect-ratio:360/220;background:#fff';
     cv.replaceWith(el);
   };
   img.src=cv.dataset.img;
