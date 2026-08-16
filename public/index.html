@@ -381,6 +381,50 @@ form button:active{transform:scale(.98)}
 .form-msg.ok{color:var(--green)}
 .form-msg.err{color:var(--pink)}
 
+/* ---- email popup ---- */
+.popup-overlay{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  background:rgba(5,5,8,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  opacity:0;pointer-events:none;transition:opacity .25s;padding:24px;
+}
+.popup-overlay.on{opacity:1;pointer-events:auto}
+.popup{
+  position:relative;max-width:440px;width:100%;
+  background:var(--ink-2);border:1px solid var(--ink-3);border-radius:10px;
+  padding:38px 34px 34px;text-align:center;
+  box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(46,100,255,.15),0 0 90px rgba(46,100,255,.18);
+  transform:translateY(14px) scale(.97);transition:transform .25s;
+}
+.popup-overlay.on .popup{transform:none}
+@media (prefers-reduced-motion:reduce){.popup-overlay,.popup{transition:none}}
+.popup-kicker{
+  font-family:'Barlow Condensed';font-weight:600;text-transform:uppercase;
+  letter-spacing:.3em;font-size:.72rem;color:var(--blue-hot);margin-bottom:10px;
+}
+.popup h2{font-family:'Marker';font-size:2rem;line-height:1.1;margin-bottom:10px}
+.popup h2 span{color:var(--blue-hot)}
+.popup p{color:var(--dim);font-size:.95rem;max-width:32ch;margin:0 auto 22px}
+.popup form{display:flex;gap:10px;flex-wrap:wrap}
+.popup input[type=email]{
+  flex:1;min-width:0;background:var(--ink);border:1.5px solid var(--ink-3);border-radius:4px;
+  color:var(--paper);font-family:'Barlow';font-size:1rem;padding:13px 14px;
+}
+.popup input[type=email]:focus-visible{outline:2px solid var(--blue-hot);outline-offset:1px}
+.popup button[type=submit]{
+  border:0;cursor:pointer;background:var(--blue);color:#fff;border-radius:4px;
+  font-family:'Barlow Condensed';font-weight:800;font-style:italic;text-transform:uppercase;
+  letter-spacing:.07em;font-size:1.02rem;padding:13px 22px;transition:background .15s;
+}
+.popup button[type=submit]:hover{background:var(--blue-hot)}
+.popup .popup-msg{margin:12px 0 0;font-weight:600;font-size:.92rem;min-height:1.4em}
+.popup .popup-msg.ok{color:var(--green)}
+.popup .popup-msg.err{color:var(--pink)}
+.popup-close{
+  position:absolute;top:10px;right:10px;background:none;border:0;cursor:pointer;
+  color:var(--dim);font-size:1.5rem;line-height:1;padding:8px;border-radius:4px;
+}
+.popup-close:hover{color:var(--paper)}
+
 /* ---- footer ---- */
 footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
@@ -580,7 +624,7 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
   <div class="wrap foot">
     <div>
       <p class="foot-logo">FREEZE <span>FREEKS</span></p>
-      <small>Crunch Like a Freek.™ · Freeze dried candy — extreme crunch, intense flavor, unreal experience. · Not affiliated with the brands of the candies we freeze dry.</small>
+      <small>Crunch Like a Freek.™ · Freeze dried candy — extreme crunch, intense flavor, unreal experience. · Not affiliated with the brands of the candies we freeze dry. · Website built by Luke Balyasny</small>
     </div>
     <div class="socials">
       <a href="https://www.tiktok.com/@freezefreeks" rel="noopener">TikTok</a>
@@ -589,6 +633,20 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
     </div>
   </div>
 </footer>
+
+<div class="popup-overlay" id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" hidden>
+  <div class="popup">
+    <button class="popup-close" id="popupclose" aria-label="Close">&times;</button>
+    <p class="popup-kicker">Psst — hey you</p>
+    <h2 id="popup-title">Join the <span>Freek List.</span></h2>
+    <p>Fresh batches sell out. Get first dibs on drops, restocks, and new flavors.</p>
+    <form id="popupform" novalidate>
+      <input type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
+      <button type="submit">I'm In</button>
+    </form>
+    <p class="popup-msg" id="popupmsg" role="status" aria-live="polite"></p>
+  </div>
+</div>
 
 <script>
 /* ================= freeze-dried candy renderer =================
@@ -971,6 +1029,55 @@ document.getElementById('orderform').addEventListener('submit',async function(e)
     msg.className='form-msg err';
   }
 });
+
+/* ---------- email popup: 5s after arrival, never nag twice ---------- */
+(function(){
+  const KEY_DONE='ff-list-joined', KEY_SNOOZE='ff-popup-snooze';
+  let store={};
+  try{store=localStorage}catch(e){}
+  if(store[KEY_DONE]||Number(store[KEY_SNOOZE]||0)>Date.now())return;
+  const ov=document.getElementById('popup');
+  const close=function(){
+    ov.classList.remove('on');
+    setTimeout(function(){ov.hidden=true},250);
+    try{store[KEY_SNOOZE]=Date.now()+7*24*3600*1000}catch(e){}
+  };
+  setTimeout(function(){
+    ov.hidden=false;
+    requestAnimationFrame(function(){ov.classList.add('on')});
+    ov.querySelector('input[type=email]').focus({preventScroll:true});
+  },5000);
+  document.getElementById('popupclose').addEventListener('click',close);
+  ov.addEventListener('click',function(e){if(e.target===ov)close()});
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)close()});
+  document.getElementById('popupform').addEventListener('submit',async function(e){
+    e.preventDefault();
+    const email=e.target.email.value.trim(),msg=document.getElementById('popupmsg');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      msg.textContent='That email doesn\u2019t look right \u2014 try again.';
+      msg.className='popup-msg err';return;
+    }
+    try{
+      let ok;
+      if(STATIC_HOST){
+        ok=(await postNetlifyForm('freek-list',{email:email})).ok;
+      }else{
+        ok=(await fetch('/api/signup',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({email:email,source:'popup'})
+        })).ok;
+      }
+      if(!ok)throw new Error();
+      msg.textContent='You\u2019re in! Welcome to the Freek List. \ud83e\udd76';
+      msg.className='popup-msg ok';
+      try{store[KEY_DONE]='1'}catch(e){}
+      setTimeout(close,1800);
+    }catch(err){
+      msg.textContent='Something went wrong \u2014 try again in a second.';
+      msg.className='popup-msg err';
+    }
+  });
+})();
 </script>
 </body>
 </html>
