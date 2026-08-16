@@ -307,13 +307,15 @@ footer{border-top:1px solid var(--ink-3);padding:46px 0 56px;background:#08080A}
 </head>
 <body>
 <!-- static form definitions for Netlify Forms detection (real forms submit via JS) -->
-<form name="freek-list" data-netlify="true" hidden aria-hidden="true">
-  <input type="email" name="email">
-</form>
-<form name="candy-request" data-netlify="true" hidden aria-hidden="true">
-  <input type="text" name="name"><input type="email" name="email">
-  <input type="text" name="flavor"><textarea name="msg"></textarea>
-</form>
+<div style="display:none" aria-hidden="true">
+  <form name="freek-list" data-netlify="true" hidden>
+    <input type="email" name="email">
+  </form>
+  <form name="candy-request" data-netlify="true" hidden>
+    <input type="text" name="name"><input type="email" name="email">
+    <input type="text" name="flavor"><textarea name="msg"></textarea>
+  </form>
+</div>
 
 <nav>
   <a class="nav-logo" href="#top">FREEZE <span>FREEKS</span></a>
